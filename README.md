@@ -3,6 +3,4 @@ an encrypting thing i made
 cc by-sa lisence
 
 
-Has
-- the one time pad
-- and, xor, and or
+`python3 zrypt.py --help` for more info
