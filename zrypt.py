@@ -9,15 +9,18 @@ except Exception as e:
   # elevate()
 # except Exception as e:
   # elevate.elevate()
+  
 def encrypt(rec_file, rec_filwe, password, buffersize):
   pyAesCrypt.encryptFile(rec_file, rec_filwe+".aes", password, buffersize)
   os.remove(rec_file)
   os.rename(rec_filwe+".aes",rec_filwe)
+
 def decrypt(rec_file, rec_filwe, password, buffersize):
   pyAesCrypt.decryptFile(rec_file, rec_filwe+".aes", password, buffersize)
   os.remove(rec_file)
   os.rename(rec_filwe+".aes",rec_filwe)
 
+ 
 def encallfiles(password,file_exts,buffersize,pattern):
   if buffersize=="":
     buffersize=64 * 1024 # 64k
@@ -30,6 +33,7 @@ def encallfiles(password,file_exts,buffersize,pattern):
       # print("File encrypted sucessgully. %s" % rec_file)
       # rec_file.split(".")[len(rec_file.split("."))-1] is file ext of file (exe, py)
       encrypt(rec_file, rec_file, password, buffersize) # inp = out
+
 def decallfiles(password,file_exts,buffersize,pattern):
   if buffersize=="" or str(type(buffersize)) != "<class 'int'>":
     buffersize=64 * 1024 # 64k
@@ -38,6 +42,8 @@ def decallfiles(password,file_exts,buffersize,pattern):
   for rec_file in glob.iglob(pattern, recursive=True):
     if rec_file.split(".")[len(rec_file.split("."))-1] in file_exts:
       decrypt(rec_file, rec_file, password, buffersize) # inp = out
+      
+      
 def randAlphanumeric(size):
   # if size=="":
   # size=16
@@ -49,22 +55,27 @@ def randAlphanumeric(size):
   for i in range(0,size):
     output+=allof[random.randint(1,len(allof)-1)]
   return output
+
+
 def and2bin(bin1,bin2):
   if bin1=="1" and bin2=="1":
     return 1
   else:
     return 0
+  
 def or2bin(bin1,bin2):
   if bin1=="1" and bin2=="1":
     return '1'
   else:
     return '0'
+  
 def xor2bin(bin1,bin2):
   if bin1 != bin2:
     return 1
   else:
     return 0
 
+  
 def xorbin(bin1,bin2):
   if len(bin1)==len(bin2):
     pass
@@ -74,6 +85,7 @@ def xorbin(bin1,bin2):
   for num in range(0,len(bin1)):
     output+=str(xor2bin(bin1[num],bin2[num]))
   return output
+
 def andbin(bin1,bin2):
   if len(bin1)==len(bin2):
     pass
@@ -83,6 +95,7 @@ def andbin(bin1,bin2):
   for num in range(0,len(bin1)):
     output+=str(and2bin(bin1[num],bin2[num]))
   return output
+
 def orbin(bin1,bin2):
   if len(bin1)==len(bin2):
     pass
@@ -123,6 +136,7 @@ def otp(str1,key):
     char=charToNum(char)
     output+=numToChar(str(char+int(keyItem)-2))
   return output
+
 def deotp(str1,key):
   output=""
   key=key.split(",")
@@ -136,6 +150,7 @@ def deotp(str1,key):
   return output
 # end one time pad
 import sys
+
 def cli():
   # print("hi")
   # t=sys.argv
@@ -207,6 +222,7 @@ Other:
   Changelogs.
     """)
     exit()
+ 
 try:
   cli()
 except Exception as e:
